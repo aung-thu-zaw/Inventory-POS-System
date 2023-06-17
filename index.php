@@ -1,8 +1,6 @@
 <?php
 require_once "connection.php";
 
-session_start();
-
 if(isset($_POST['login'])) {
     $email=$_POST["email"];
     $password=$_POST["password"];
@@ -13,15 +11,23 @@ if(isset($_POST['login'])) {
 
     $row=$select->fetch(PDO::FETCH_ASSOC);
 
-    if($row['email']===$email && $row['password']===$password){
+    if($row['email']===$email && $row['password']===$password) {
+
+        $_SESSION["user_id"]=$row["id"];
+        $_SESSION["name"]=$row["name"];
+        $_SESSION["email"]=$row["email"];
+        $_SESSION["role"]=$row["role"];
+
         $successMessage="Login Successful.";
-        
-        header('refresh:1;dashboard.php');
-    }else{
+
+        $row['role']==='admin' ?
+        header('refresh:1;admin-dashboard.php') :
+        header('refresh:1;user-dashboard.php');
+
+    } else {
         echo "Fail Login.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>

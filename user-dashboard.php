@@ -1,5 +1,13 @@
-<?php include_once "header.php"; ?>
+<?php
+ob_start();
 
+include_once "header.php";
+
+if(empty($_SESSION["email"])) {
+    header("location:index.php");
+}
+
+?>
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -25,5 +33,7 @@
         <p>Sidebar content</p>
     </div>
 </aside>
+<h1>This is user dashboard</h1>
+
 
 <?php include_once "footer.php"; ?>
