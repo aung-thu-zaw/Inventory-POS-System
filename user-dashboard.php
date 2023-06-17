@@ -7,6 +7,10 @@ if(empty($_SESSION["email"])) {
     header("location:index.php");
 }
 
+if($_SESSION["role"]==='admin') {
+    header("location:admin-dashboard.php");
+}
+
 ?>
 <div class="content-wrapper">
     <div class="content-header">
